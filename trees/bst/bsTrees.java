@@ -141,16 +141,39 @@ public class bsTrees {
     }
     
 //Q2    Vertical order traversal
-    {
+    
         class Values {
             int min;
             int max;
+            Values() {
+                this.min = Integer.MIN_VALUE;
+                this.max = Integer.MIN_VALUE;
+            }
         }
 
+        void horizontalMinMax(Node head,Values value,int dist) {
+            if(head == null) {
+                return;
+            }
+            System.out.println(dist+" "+head.value);
+            if(dist < value.min) {
+                value.min = dist;
+            }
+            if(dist > value.max) {
+                value.max = dist;
+            }
+
+            horizontalMinMax(head.left,value,dist-1);
+            horizontalMinMax(head.right,value,dist+1);
+        }
         
+        void showVerticalLine() {
+            Values val = new Values();
+            horizontalMinMax(root,val,0);
+        }
 
 
-    }
+    
 
     //CRUD operations
 
@@ -182,8 +205,8 @@ public class bsTrees {
 
         int kthSmallestSum = sc.nextInt();
 
-        kthMinSum(kthSmallestSum);
-        
+        //kthMinSum(kthSmallestSum);
+        bst.showVerticalLine();
         
     }
 }
