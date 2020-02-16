@@ -37,6 +37,9 @@ class LinkedList {
     Node delete(Node head, int value) {
         
         Node top = head;
+        if(top.next == null && top.value == value) {
+            head= null;
+        }
         while(top.next != null) {
 
             if(top.value == value) {
@@ -107,7 +110,77 @@ class LinkedList {
             return false;
         }
     }
+
+
+//Q2 Duplicates from sorted list
+    void removeDuplicatesSorted(Node head) {
+
+           
+            while(head.next != null) {
+                if(head.value == head.next.value) {
+                    head.next = head.next.next;
+                }
+                else {
+                    head = head.next;
+                }
+            }
+            
+        }
+
+//Q3 Delete duplicates
+void deleteDuplicatesSorted(Node head) {
+
+       
+    while( head != null && head.next != null ) {
+        
+        if(head.value == head.next.value) {
+           int data = head.value;
+           
+           while(head.value == data) {
+               head = head.next;
+               root = delete(root,data);
+               Node test = root;
+               while(test != null)
+               {
+                test = test.next;
+                
+               }
+               if(head == null) {
+                   break;
+               }
+           }
+           
+        }
+        else {
+            head = head.next;
+        }
+       
+    }
+    
 }
+
+
+        void removeDuplicates(String sortStatus){
+            if(sortStatus == "sorted") {
+                removeDuplicatesSorted(root);
+            }
+            else {
+                System.out.print("Sorting status undefined.");
+            }
+        }
+        void deleteDuplicates(String sortStatus){
+            if(sortStatus == "sorted") {
+                deleteDuplicatesSorted(root);
+            }
+            else {
+                System.out.print("Sorting status undefined.");
+            }
+        }
+}
+
+       
+
+  
 
 
 
@@ -125,7 +198,9 @@ public class singlyLinkedList extends LinkedList {
         }
 
         list.printList();
-        System.out.print(list.palindromeCheck());
+        System.out.println();
+        list.deleteDuplicates("sorted");
+        list.printList();
         
     }
 
